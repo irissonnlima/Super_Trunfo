@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/irisson/Documentos/Super_Trunfo/cards.h
+algorithm
+-
+iostream
+-
+iomanip
+-
+vector
+-
+string
+-
+
+/home/irisson/Documentos/Super_Trunfo/jodador.h
+cards.h
+/home/irisson/Documentos/Super_Trunfo/cards.h
+
+/home/irisson/Documentos/Super_Trunfo/main.cpp
+cards.h
+/home/irisson/Documentos/Super_Trunfo/cards.h
+jodador.h
+/home/irisson/Documentos/Super_Trunfo/jodador.h
+
