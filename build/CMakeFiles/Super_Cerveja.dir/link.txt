@@ -1,1 +1,0 @@
-/usr/bin/g++  -g  -rdynamic CMakeFiles/Super_Cerveja.dir/cards.cpp.o CMakeFiles/Super_Cerveja.dir/jogador.cpp.o CMakeFiles/Super_Cerveja.dir/main.cpp.o  -o Super_Cerveja 
