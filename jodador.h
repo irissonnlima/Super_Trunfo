@@ -35,8 +35,10 @@ namespace trabalho
 
     class jogo : private deck, private jogador
     {
-        std::vector<jogador>    jogadores;
-        deck                    deck_st;
+        std::vector<jogador>            jogadores;
+        std::vector<trabalho::card>     empate;
+        deck                            deck_st;
+        int                             player;
 
         double          random          (bool uniform=true);
         
@@ -45,6 +47,8 @@ namespace trabalho
 
         void            mount_jogadores ();
         void            mount_deck      ();
+        void            shuffle         ();
+        void            card_dist       ();     
     };
 }
 

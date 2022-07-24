@@ -94,4 +94,53 @@ void            trabalho::jogo::mount_jogadores ()
 }
 
 void            trabalho::jogo::mount_deck      ()
-{}
+{
+    trabalho::card  c1({"Opa Pilsen", 1, 1, 10, 5, 50, 70, 80});
+    trabalho::card  c2({"Mr. Lúpulo", 2, 1, 10, 5, 50, 70, 80});
+    trabalho::card  c3({"", 3, 1, 0, 0, 0, 0, 0});
+    trabalho::card  c4({"", 4, 1, 0, 0, 0, 0, 0});
+    trabalho::card  c5({"", 5, 1, 0, 0, 0, 0, 0});
+    trabalho::card  c6({"", 6, 1, 0, 0, 0, 0, 0});
+    trabalho::card  c7({"", 7, 1, 0, 0, 0, 0, 0});
+    trabalho::card  c8({"", 1, 2, 0, 0, 0, 0, 0});
+    trabalho::card  c9({"", 2, 2, 0, 0, 0, 0, 0});
+    trabalho::card c10({"", 3, 2, 0, 0, 0, 0, 0});
+    trabalho::card c11({"", 4, 2, 0, 0, 0, 0, 0});
+    trabalho::card c12({"", 5, 2, 0, 0, 0, 0, 0});
+    trabalho::card c13({"", 6, 2, 0, 0, 0, 0, 0});
+    trabalho::card c14({"", 7, 2, 0, 0, 0, 0, 0});
+    trabalho::card c15({"", 1, 3, 0, 0, 0, 0, 0});
+    trabalho::card c16({"", 2, 3, 0, 0, 0, 0, 0});
+    trabalho::card c17({"", 3, 3, 0, 0, 0, 0, 0});
+    trabalho::card c18({"", 4, 3, 0, 0, 0, 0, 0});
+    trabalho::card c19({"", 5, 3, 0, 0, 0, 0, 0});
+    trabalho::card c20({"", 6, 3, 0, 0, 0, 0, 0});
+    trabalho::card c21({"", 7, 3, 0, 0, 0, 0, 0});
+    trabalho::card c22({"", 1, 4, 0, 0, 0, 0, 0});
+    trabalho::card c23({"", 2, 4, 0, 0, 0, 0, 0});
+    trabalho::card c24({"", 3, 4, 0, 0, 0, 0, 0});
+    trabalho::card c25({"", 4, 4, 0, 0, 0, 0, 0});
+    trabalho::card c26({"", 5, 4, 0, 0, 0, 0, 0});
+    trabalho::card c27({"", 6, 4, 0, 0, 0, 0, 0});
+    trabalho::card c28({"", 7, 4, 0, 0, 0, 0, 0});
+    trabalho::card c29({"Guinness", 0, 0, 0, 0, 0, 0, 0});
+
+    deck_st = trabalho::deck({c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15,
+                              c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29});
+
+}
+
+void            trabalho::jogo::shuffle         ()
+{ deck_st.shuffle();}
+
+void            trabalho::jogo::card_dist       ()
+{
+    unsigned p=0;
+    for (auto& card : deck_st.copy_cards())
+    {
+        jogadores[p].add_card(card);
+        p = (p+1)%jogadores.size();
+    }
+    player = p%jogadores.size();
+}
+

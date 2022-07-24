@@ -48,11 +48,11 @@ namespace trabalho
     class deck : private card
     {
         std::vector<card>  card_list;
-        int                 tamanho;
 
         public:
                 deck        ();
                 deck        (std::vector<card> cards);
+                deck        (const deck& deck_copy);
 
         void    shuffle     ();
         void    print       ();
@@ -60,6 +60,8 @@ namespace trabalho
         void    add_card    (card new_card);
         
         card    pick_card   ();
+        std::vector<card>   copy_cards  ();
+
     };
     
 }

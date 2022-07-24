@@ -101,10 +101,15 @@ void    trabalho::card::print   ()
 
 // ==================================== Construção dos objetos de deck ====================================
                 trabalho::deck::deck        ()
-{tamanho = 0;}
+{card_list = std::vector<trabalho::card>();}
 
                 trabalho::deck::deck        (std::vector<card> cards)
-{card_list=cards; tamanho=cards.size();}
+{card_list=cards;}
+
+                trabalho::deck::deck        (const deck& deck_copy)
+{
+    card_list = deck_copy.card_list;                        
+}
 
 void            trabalho::deck::print       ()
 {
@@ -123,7 +128,7 @@ void            trabalho::deck::print_id    ()
 }
 
 void            trabalho::deck::add_card    (card new_card)
-{card_list.push_back(new_card); tamanho++;}
+{card_list.push_back(new_card);}
 
 void            trabalho::deck::shuffle     ()
 {std::random_shuffle(card_list.begin(), card_list.end());}
@@ -135,3 +140,7 @@ trabalho::card  trabalho::deck::pick_card   ()
     return pop_card;
 }
 
+std::vector<trabalho::card>   trabalho::deck::copy_cards  ()
+{
+    return card_list;
+}
