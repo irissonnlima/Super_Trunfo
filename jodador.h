@@ -37,12 +37,13 @@ namespace trabalho
 
     class jogo : private deck, private jogador
     {
+        trabalho::card                  None;
         std::vector<jogador>            Jogadores;
         std::vector<trabalho::card>     Empate;
         deck                            Deck_st;
         int                             Player;
         bool                            Acabou;
-
+        
         double          random          (bool uniform=true);
         
         public:
@@ -56,7 +57,7 @@ namespace trabalho
 
         void            bot_play        ();  
         void            gamer_play      ();
-        void            verify_end      ();
+        std::string     verify_end      ();
 
         void            jogo_start      ();
     };

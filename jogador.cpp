@@ -74,7 +74,7 @@ double          trabalho::jogo::random          (bool uniform)
 }
 
                 trabalho::jogo::jogo            ()
-{Acabou = false;}
+{Acabou = false; None = {"None Card", 99, 99, 0, 0,  0, 0, 0};}
 
 void            trabalho::jogo::mount_jogadores ()
 {
@@ -110,6 +110,8 @@ void            trabalho::jogo::mount_jogadores ()
             else
                 d = 100;
         }
+        else
+            b=false;
 
         Jogadores.push_back(jogador({}, p, b, d));    
         n++;
@@ -176,19 +178,24 @@ int             trabalho::jogo::avaliar         (int index)
     int                         id          = 0;
     int                         numero      = 0;
     // =========================== Seleção as cartas que serão comparadas ===========================
-
+    std::cout << "Avaliação de " << index << std::endl;
     for (int i=0; i<Jogadores.size(); i++)
     {
-        std::cout<<Jogadores[i].getNome()<<std::endl;
-        Jogadores[i].back().print();
-        std::cout<<std::endl;
+        if (Jogadores[i].is_ended())
+        {
+            std::cout<<Jogadores[i].getNome()<<std::endl;
+            Jogadores[i].back().print();
+            std::cout<<std::endl;
 
-        lista_carta.push_back(Jogadores[i].pick_card());
-        if(lista_carta.back().getClasse() == 0)
-        {    
-            trunfo  = true;
-            id      = i;
+            lista_carta.push_back(Jogadores[i].pick_card());
+            if(lista_carta.back().getClasse() == 0)
+            {    
+                trunfo  = true;
+                id      = i;
+            }
         }
+        else
+            lista_carta.push_back(None);
     }
     // =========================== Verificação e teste em caso de trunfo ===========================
     if(trunfo)
@@ -207,6 +214,8 @@ int             trabalho::jogo::avaliar         (int index)
                 empate  = false;
                 id      = i;
             }
+            else if (((lista_carta[id])[index] > (lista_carta[i])[index]))
+                empate  = false;
         }
         if (empate)
         {
@@ -219,12 +228,15 @@ int             trabalho::jogo::avaliar         (int index)
     }
 
     for (auto& ct:lista_carta)
-        Jogadores[id].add_card(ct);
+        if (ct.getClasse()!=99)
+            Jogadores[id].add_card(ct);
     for (auto& ct:Empate)
-        Jogadores[id].add_card(ct);
+        if (ct.getClasse()!=99)
+            Jogadores[id].add_card(ct);
     Empate = std::vector<trabalho::card>();
-    std::cout << "Jogador " << Jogadores[id].getNome() << " GANHOU!!!!!" << std::endl;
+    std::cout << "Jogador " << Jogadores[id].getNome() << " GANHOU a rodada!!!!!" << std::endl;
     std::cout << "-----------------------------------------------------------" << std::endl;
+    Player = id;
     return id;
 }
 
@@ -254,23 +266,31 @@ void            trabalho::jogo::gamer_play      ()
     avaliar(id);
 }
 
-void            trabalho::jogo::verify_end      ()
+std::string     trabalho::jogo::verify_end      ()
 {
-    auto    size  = Jogadores.size();
-    int     morto = 0;
+    std::string vencedor;
+    auto        size  = Jogadores.size();
+    int         morto = 0;
 
     for (auto& p:Jogadores)
-        if(p.is_ended())
+        if(!p.is_ended())
             morto++;
+        else
+            vencedor = p.getNome();
     if (morto >= (size-1))
         Acabou = true;
     else
         Acabou = false;
+    
+    return vencedor;
 }
+
 void            trabalho::jogo::jogo_start      ()
 {
-    int rodada = 0;
-    while(!Acabou)
+    std::string vencedor;
+    int         rodada = 0;
+
+    while(!Acabou && rodada < 100000)
     {
         std::cout << "-----------------------------------------------------------" << std::endl;
         std::cout << "RODADA " << rodada << std::endl;
@@ -279,7 +299,11 @@ void            trabalho::jogo::jogo_start      ()
         else
             gamer_play();
         
-        verify_end();
+        vencedor = verify_end();
         rodada++;
     }
+    if (rodada>=100000)
+        std::cout << "Cansamos tá doido!!" << std::endl;
+    else
+        std::cout << "VENCEDOR: " << vencedor << std::endl;
 }
