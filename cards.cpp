@@ -123,11 +123,11 @@ void    trabalho::card::print   ()
 {
     int tam = 34;
     std::string p1  = "|Nome: "       + nome + " ",
-                p2 = "|Tato: "       + std::to_string(tato)      + " ",
-                p3 = "|Aroma: "      + std::to_string(aroma)     + " ",
-                p4 = "|Sabor: "      + std::to_string(sabor)     + " ",
-                p5 = "|Balanço: "    + std::to_string(balanco)   + " ",
-                p6 = "|Aparência: "  + std::to_string(aparencia) + " ";
+                p2 = "|(0)Tato: "       + std::to_string(tato)      + " ",
+                p3 = "|(1)Aroma: "      + std::to_string(aroma)     + " ",
+                p4 = "|(2)Sabor: "      + std::to_string(sabor)     + " ",
+                p5 = "|(3)Balanço: "    + std::to_string(balanco)   + " ",
+                p6 = "|(4)Aparência: "  + std::to_string(aparencia) + " ";
     
     std::cout << "(" << numero << (char) (64+classe) << ")" << std::setfill('=') << std::setw(tam-4) << "+" << std::endl;
     std::cout << p1  << std::setfill(' ') << std::setw(tam-p1.length())     << "+" << std::endl;

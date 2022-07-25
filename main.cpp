@@ -11,7 +11,7 @@ int main(int, char**)
     novo_jogo.mount_deck();
     novo_jogo.shuffle();
     novo_jogo.card_dist();
-    novo_jogo.bot_play();
+    novo_jogo.jogo_start();
     // ======================================= COMEÇO DO JOGO =======================================
 
 }

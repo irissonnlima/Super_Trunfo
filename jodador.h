@@ -29,6 +29,7 @@ namespace trabalho
         std::string     getNome     ();
         bool            getBot      ();
         int             getDificult ();
+        int             is_ended    ();
 
         trabalho::card  back        ();
         void            print_id    ();
@@ -40,6 +41,7 @@ namespace trabalho
         std::vector<trabalho::card>     Empate;
         deck                            Deck_st;
         int                             Player;
+        bool                            Acabou;
 
         double          random          (bool uniform=true);
         
@@ -52,7 +54,11 @@ namespace trabalho
         void            card_dist       ();
         int             avaliar         (int index);
 
-        void            bot_play        ();     
+        void            bot_play        ();  
+        void            gamer_play      ();
+        void            verify_end      ();
+
+        void            jogo_start      ();
     };
 }
 

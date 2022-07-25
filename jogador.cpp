@@ -42,6 +42,8 @@ int             trabalho::jogador::getDificult ()
 trabalho::card  trabalho::jogador::back        ()
 { return mao.back(); }
 
+int             trabalho::jogador::is_ended    ()
+{ return mao.size(); }
 
 void            trabalho::jogador::print_id     ()
 {
@@ -72,7 +74,7 @@ double          trabalho::jogo::random          (bool uniform)
 }
 
                 trabalho::jogo::jogo            ()
-{}
+{Acabou = false;}
 
 void            trabalho::jogo::mount_jogadores ()
 {
@@ -169,25 +171,51 @@ void            trabalho::jogo::card_dist       ()
 int             trabalho::jogo::avaliar         (int index)
 {
     std::vector<trabalho::card> lista_carta;
-    for (auto& jog:Jogadores)
-        lista_carta.push_back(jog.pick_card());
-    
-    int  id     = 0;
-    bool empate = true;
-    
-    for (int i=0; i<lista_carta.size(); i++)
-    {    std::cout << (lista_carta[i])[index] <<" "<< (lista_carta[id])[index]<< std::endl;
-        if((lista_carta[i])[index] > (lista_carta[id])[index])
-        {  
-            empate  = false;
+    bool                        trunfo;
+    bool                        empate      = true;
+    int                         id          = 0;
+    int                         numero      = 0;
+    // =========================== Seleção as cartas que serão comparadas ===========================
+
+    for (int i=0; i<Jogadores.size(); i++)
+    {
+        std::cout<<Jogadores[i].getNome()<<std::endl;
+        Jogadores[i].back().print();
+        std::cout<<std::endl;
+
+        lista_carta.push_back(Jogadores[i].pick_card());
+        if(lista_carta.back().getClasse() == 0)
+        {    
+            trunfo  = true;
             id      = i;
         }
     }
-    if (empate)
+    // =========================== Verificação e teste em caso de trunfo ===========================
+    if(trunfo)
     {
-        for (auto& ct:lista_carta)
-            Empate.push_back(ct);
-        return Player;
+        for(int i=0; i<lista_carta.size(); i++)
+            if(lista_carta[i].getClasse()==1 && lista_carta[i].getNumero()>numero)
+                id = i;
+    }
+    // =========================== Análise a jogada na inexistência de trunfo ===========================
+    else
+    {
+        for (int i=0; i<lista_carta.size(); i++)
+        {
+            if((lista_carta[i])[index] > (lista_carta[id])[index])
+            {  
+                empate  = false;
+                id      = i;
+            }
+        }
+        if (empate)
+        {
+            std::cout << "EMPATE!!!!" << std::endl;
+            std::cout << "-----------------------------------------------------------" << std::endl;
+            for (auto& ct:lista_carta)
+                Empate.push_back(ct);
+            return Player;
+        }
     }
 
     for (auto& ct:lista_carta)
@@ -195,25 +223,63 @@ int             trabalho::jogo::avaliar         (int index)
     for (auto& ct:Empate)
         Jogadores[id].add_card(ct);
     Empate = std::vector<trabalho::card>();
+    std::cout << "Jogador " << Jogadores[id].getNome() << " GANHOU!!!!!" << std::endl;
+    std::cout << "-----------------------------------------------------------" << std::endl;
     return id;
 }
 
 void            trabalho::jogo::bot_play        ()
 {
-    // 0 x 1
-    //min y max
-    //(y-min)/(max-min) = x therefore y = (max-min)*x + min
     int     roleta  = 100*random();
     auto    fCard   = Jogadores[Player].back();
     int     id      = fCard.maxStats();
     if (roleta > Jogadores[Player].getDificult())
         id   = 5*random();
-    auto idi = Player;
-    auto idf = avaliar(id);
-    while(idi==idf)
-    {
-        id  = Jogadores[Player].back().maxStats();
-        idf = avaliar(id);
-    }
+    // auto idi = Player;
+    //auto idf = avaliar(id);
+    avaliar(id);
+    // while(idi==idf)
+    // {
+    //     id  = Jogadores[Player].back().maxStats();
+    //     idf = avaliar(id);
+    // }
+}
 
+void            trabalho::jogo::gamer_play      ()
+{
+    int id=0;
+    Jogadores[Player].back().print();
+    std::cout << Jogadores[Player].getNome() << " qual status deseja comparar:" << std::endl;
+    std::cin >> id;
+    avaliar(id);
+}
+
+void            trabalho::jogo::verify_end      ()
+{
+    auto    size  = Jogadores.size();
+    int     morto = 0;
+
+    for (auto& p:Jogadores)
+        if(p.is_ended())
+            morto++;
+    if (morto >= (size-1))
+        Acabou = true;
+    else
+        Acabou = false;
+}
+void            trabalho::jogo::jogo_start      ()
+{
+    int rodada = 0;
+    while(!Acabou)
+    {
+        std::cout << "-----------------------------------------------------------" << std::endl;
+        std::cout << "RODADA " << rodada << std::endl;
+        if (Jogadores[Player].getBot())
+            bot_play();
+        else
+            gamer_play();
+        
+        verify_end();
+        rodada++;
+    }
 }
