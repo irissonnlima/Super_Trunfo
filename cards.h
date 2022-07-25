@@ -42,7 +42,11 @@ namespace trabalho
         void    setAroma    (int val);
         void    setTato     (int val);
 
+        int     returnStats (int val);
+        int     maxStats    ();
         void    print       ();
+
+        int     operator[]  (int index);
     };
 
     class deck : private card

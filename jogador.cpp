@@ -21,6 +21,28 @@ trabalho::card  trabalho::jogador::pick_card   ()
 void            trabalho::jogador::add_card    (trabalho::card carta)
 { mao.insert(mao.begin(), carta); }
 
+void            trabalho::jogador::setNome     (std::string nome_v)
+{nome=nome_v;}
+
+void            trabalho::jogador::setBot      (bool bot_v)
+{bot=bot_v;}
+
+void            trabalho::jogador::setDificult (int val)
+{dif=val;}
+
+std::string     trabalho::jogador::getNome     ()
+{return nome;}
+
+bool            trabalho::jogador::getBot      ()
+{return bot;}
+
+int             trabalho::jogador::getDificult ()
+{return dif;}
+
+trabalho::card  trabalho::jogador::back        ()
+{ return mao.back(); }
+
+
 void            trabalho::jogador::print_id     ()
 {
     if (!mao.size())
@@ -87,60 +109,111 @@ void            trabalho::jogo::mount_jogadores ()
                 d = 100;
         }
 
-        jogadores.push_back(jogador({}, p, b, d));    
+        Jogadores.push_back(jogador({}, p, b, d));    
         n++;
     }
     
 }
 
 void            trabalho::jogo::mount_deck      ()
-{
-    trabalho::card  c1({"Opa Pilsen", 1, 1, 10, 5, 50, 70, 80});
-    trabalho::card  c2({"Mr. Lúpulo", 2, 1, 10, 5, 50, 70, 80});
-    trabalho::card  c3({"", 3, 1, 0, 0, 0, 0, 0});
-    trabalho::card  c4({"", 4, 1, 0, 0, 0, 0, 0});
-    trabalho::card  c5({"", 5, 1, 0, 0, 0, 0, 0});
-    trabalho::card  c6({"", 6, 1, 0, 0, 0, 0, 0});
-    trabalho::card  c7({"", 7, 1, 0, 0, 0, 0, 0});
-    trabalho::card  c8({"", 1, 2, 0, 0, 0, 0, 0});
-    trabalho::card  c9({"", 2, 2, 0, 0, 0, 0, 0});
-    trabalho::card c10({"", 3, 2, 0, 0, 0, 0, 0});
-    trabalho::card c11({"", 4, 2, 0, 0, 0, 0, 0});
-    trabalho::card c12({"", 5, 2, 0, 0, 0, 0, 0});
-    trabalho::card c13({"", 6, 2, 0, 0, 0, 0, 0});
-    trabalho::card c14({"", 7, 2, 0, 0, 0, 0, 0});
-    trabalho::card c15({"", 1, 3, 0, 0, 0, 0, 0});
-    trabalho::card c16({"", 2, 3, 0, 0, 0, 0, 0});
-    trabalho::card c17({"", 3, 3, 0, 0, 0, 0, 0});
-    trabalho::card c18({"", 4, 3, 0, 0, 0, 0, 0});
-    trabalho::card c19({"", 5, 3, 0, 0, 0, 0, 0});
-    trabalho::card c20({"", 6, 3, 0, 0, 0, 0, 0});
-    trabalho::card c21({"", 7, 3, 0, 0, 0, 0, 0});
-    trabalho::card c22({"", 1, 4, 0, 0, 0, 0, 0});
-    trabalho::card c23({"", 2, 4, 0, 0, 0, 0, 0});
-    trabalho::card c24({"", 3, 4, 0, 0, 0, 0, 0});
-    trabalho::card c25({"", 4, 4, 0, 0, 0, 0, 0});
-    trabalho::card c26({"", 5, 4, 0, 0, 0, 0, 0});
-    trabalho::card c27({"", 6, 4, 0, 0, 0, 0, 0});
-    trabalho::card c28({"", 7, 4, 0, 0, 0, 0, 0});
-    trabalho::card c29({"Guinness", 0, 0, 0, 0, 0, 0, 0});
+{                                                //Tato, aroma, sabor, balanço, aparencia 
+    trabalho::card  c1({"Opa Pilsen"        , 1, 1,  10,     5,    50,      10,        40});
+    trabalho::card  c2({"Mr. Lúpulo"        , 2, 1,  15,    15,    60,      25,        45});
+    trabalho::card  c3({"Magnifica São Luís", 3, 1,  10,    60,    65,      50,        45});
+    trabalho::card  c4({"Lagunitas ipa"     , 4, 1,  80,    85,    70,      80,        90});
+    trabalho::card  c5({"Stella Artois"     , 5, 1,  50,    30,    70,      85,        50});
+    trabalho::card  c6({"Wäls"              , 6, 1,  60,    90,    80,      90,        80});
+    trabalho::card  c7({"Spaten munich"     , 7, 1,  40,    35,    60,      80,        50});
+    trabalho::card  c8({"Serramalte"        , 1, 2,  45,    20,    40,      50,        50});
+    trabalho::card  c9({"Patagonia"         , 2, 2,  40,    10,    20,      25,        30});
+    trabalho::card c10({"Original"          , 3, 2,  10,    10,    35,      40,        20});
+    trabalho::card c11({"Goose Island"      , 4, 2,  80,    40,    60,      75,        85});
+    trabalho::card c12({"Colorado"          , 5, 2,  20,    25,    35,      30,        50});
+    trabalho::card c13({"Corona"            , 6, 2,  10,    35,    40,      55,        55});
+    trabalho::card c14({"Brahma"            , 7, 2,   5,    10,    10,      10,        35});
+    trabalho::card c15({"Budweiser"         , 1, 3,   5,    15,    10,      25,        45});
+    trabalho::card c16({"Bohemia"           , 2, 3,  10,    15,    15,      30,        40});
+    trabalho::card c17({"Beck's"            , 3, 3,  30,    40,    25,      40,        30});
+    trabalho::card c18({"Antarctica"        , 4, 3,   5,     0,    10,      25,        20});
+    trabalho::card c19({"Sol"               , 5, 3,  30,    75,     0,      85,        70});
+    trabalho::card c20({"Império"           , 6, 3,  15,    50,    55,      25,        55});
+    trabalho::card c21({"Petra"             , 7, 3,  25,    35,    40,      15,        80});
+    trabalho::card c22({"Heineken"          , 1, 4,  55,    65,     0,      40,        20});
+    trabalho::card c23({"Cacildis"          , 2, 4,  65,     0,    50,      22,        30});
+    trabalho::card c24({"Madame Satã"       , 3, 4,  95,    70,     5,      40,        45});
+    trabalho::card c25({"Amistel"           , 4, 4,  60,    55,    35,      60,        50});
+    trabalho::card c26({"Itaipava"          , 5, 4,   0,     0,     0,       0,         0});
+    trabalho::card c27({"Skol"              , 6, 4,   5,    40,     5,      10,        80});
+    trabalho::card c28({"Kaiser"            , 7, 4,  10,    25,    55,      55,        10});
+    trabalho::card c29({"Guinness"          , 0, 0, 100,    40,    70,      25,      8000});
 
-    deck_st = trabalho::deck({c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15,
+    Deck_st = trabalho::deck({c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15,
                               c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29});
 
 }
 
 void            trabalho::jogo::shuffle         ()
-{ deck_st.shuffle();}
+{ Deck_st.shuffle();}
 
 void            trabalho::jogo::card_dist       ()
 {
     unsigned p=0;
-    for (auto& card : deck_st.copy_cards())
+    for (auto& card : Deck_st.copy_cards())
     {
-        jogadores[p].add_card(card);
-        p = (p+1)%jogadores.size();
+        Jogadores[p].add_card(card);
+        p = (p+1)%Jogadores.size();
     }
-    player = p%jogadores.size();
+    Player = p%Jogadores.size();
 }
 
+int             trabalho::jogo::avaliar         (int index)
+{
+    std::vector<trabalho::card> lista_carta;
+    for (auto& jog:Jogadores)
+        lista_carta.push_back(jog.pick_card());
+    
+    int  id     = 0;
+    bool empate = true;
+    
+    for (int i=0; i<lista_carta.size(); i++)
+    {    std::cout << (lista_carta[i])[index] <<" "<< (lista_carta[id])[index]<< std::endl;
+        if((lista_carta[i])[index] > (lista_carta[id])[index])
+        {  
+            empate  = false;
+            id      = i;
+        }
+    }
+    if (empate)
+    {
+        for (auto& ct:lista_carta)
+            Empate.push_back(ct);
+        return Player;
+    }
+
+    for (auto& ct:lista_carta)
+        Jogadores[id].add_card(ct);
+    for (auto& ct:Empate)
+        Jogadores[id].add_card(ct);
+    Empate = std::vector<trabalho::card>();
+    return id;
+}
+
+void            trabalho::jogo::bot_play        ()
+{
+    // 0 x 1
+    //min y max
+    //(y-min)/(max-min) = x therefore y = (max-min)*x + min
+    int     roleta  = 100*random();
+    auto    fCard   = Jogadores[Player].back();
+    int     id      = fCard.maxStats();
+    if (roleta > Jogadores[Player].getDificult())
+        id   = 5*random();
+    auto idi = Player;
+    auto idf = avaliar(id);
+    while(idi==idf)
+    {
+        id  = Jogadores[Player].back().maxStats();
+        idf = avaliar(id);
+    }
+
+}

@@ -77,6 +77,48 @@ void    trabalho::card::setTato     (int val)
 void    trabalho::card::setNome     (std::string val)
 {nome=val;}
 
+int     trabalho::card::returnStats (int val)
+{
+    switch (val)
+    {
+    case 0:
+        return tato;
+        break;
+    
+    case 1:
+        return aroma;
+        break;
+
+    case 2:
+        return sabor;
+        break;
+    
+    case 3:
+        return balanco;
+        break;
+    
+    case 4:
+        return aparencia;
+        break;
+
+    default:
+        return -1;
+        break;
+    }
+}
+
+int     trabalho::card::maxStats    ()
+{
+    int maxval=returnStats(0), id=0;
+    for (int i=0; i<5; i++)
+        if(returnStats(i) > maxval)
+        {
+            maxval  = returnStats(i);
+            id      = i;
+        }
+    return id;
+}
+
 void    trabalho::card::print   ()
 {
     int tam = 34;
@@ -98,6 +140,9 @@ void    trabalho::card::print   ()
     std::cout << p6  << std::setfill(' ') << std::setw(tam+1-p6.length())   << "+" << std::endl;
     std::cout << "+" << std::setfill('=') << std::setw(tam-1)               << "+" << std::endl;
 }
+
+int     trabalho::card::operator[]  (int index)
+{return returnStats(index);}
 
 // ==================================== Construção dos objetos de deck ====================================
                 trabalho::deck::deck        ()
@@ -144,3 +189,4 @@ std::vector<trabalho::card>   trabalho::deck::copy_cards  ()
 {
     return card_list;
 }
+

@@ -30,15 +30,16 @@ namespace trabalho
         bool            getBot      ();
         int             getDificult ();
 
+        trabalho::card  back        ();
         void            print_id    ();
     };
 
     class jogo : private deck, private jogador
     {
-        std::vector<jogador>            jogadores;
-        std::vector<trabalho::card>     empate;
-        deck                            deck_st;
-        int                             player;
+        std::vector<jogador>            Jogadores;
+        std::vector<trabalho::card>     Empate;
+        deck                            Deck_st;
+        int                             Player;
 
         double          random          (bool uniform=true);
         
@@ -48,8 +49,13 @@ namespace trabalho
         void            mount_jogadores ();
         void            mount_deck      ();
         void            shuffle         ();
-        void            card_dist       ();     
+        void            card_dist       ();
+        int             avaliar         (int index);
+
+        void            bot_play        ();     
     };
 }
 
 #endif
+// elefante camelo cavaaalo garça vaquita
+// ordinário mequetrefe arretado oculto  miudo
