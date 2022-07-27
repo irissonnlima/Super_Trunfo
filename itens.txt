@@ -1,0 +1,4 @@
+Itens Requeridos
+
+- Foram construídos 4 classes :
+    - Cartas: 

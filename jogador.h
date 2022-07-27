@@ -6,7 +6,7 @@
 
 namespace trabalho
 {
-    class jogador : private card
+    class jogador
     {
         std::vector<trabalho::card> mao;
         std::string                 nome;
@@ -29,37 +29,10 @@ namespace trabalho
         std::string     getNome     ();
         bool            getBot      ();
         int             getDificult ();
-        int             is_ended    ();
+        unsigned        is_ended    ();
 
         trabalho::card  back        ();
         void            print_id    ();
-    };
-
-    class jogo : private deck, private jogador
-    {
-        trabalho::card                  None;
-        std::vector<jogador>            Jogadores;
-        std::vector<trabalho::card>     Empate;
-        deck                            Deck_st;
-        int                             Player;
-        bool                            Acabou;
-        
-        double          random          (bool uniform=true);
-        
-        public:
-                        jogo            ();
-
-        void            mount_jogadores ();
-        void            mount_deck      ();
-        void            shuffle         ();
-        void            card_dist       ();
-        int             avaliar         (int index);
-
-        void            bot_play        ();  
-        void            gamer_play      ();
-        std::string     verify_end      ();
-
-        void            jogo_start      ();
     };
 }
 

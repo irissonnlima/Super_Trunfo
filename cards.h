@@ -26,7 +26,7 @@ namespace trabalho
                              int aroma_v, int sabor_v, int balanco_v, int aparencia_v );
         
         int     getNumero   ();
-        int     getClasse   ();
+        char    getClasse   ();
         int     getAparencia();
         int     getBalanco  ();
         int     getSabor    ();
@@ -47,25 +47,6 @@ namespace trabalho
         void    print       ();
 
         int     operator[]  (int index);
-    };
-
-    class deck : private card
-    {
-        std::vector<card>  card_list;
-
-        public:
-                deck        ();
-                deck        (std::vector<card> cards);
-                deck        (const deck& deck_copy);
-
-        void    shuffle     ();
-        void    print       ();
-        void    print_id    ();
-        void    add_card    (card new_card);
-        
-        card    pick_card   ();
-        std::vector<card>   copy_cards  ();
-
     };
     
 }
