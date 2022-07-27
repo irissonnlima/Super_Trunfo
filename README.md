@@ -2,6 +2,8 @@
 ### _O super trunfo das cervejas brasileiras_
 Esse projeto tem como objetivo utilizar o cunteúdo aprendido na matéria de programação III(EMB5631). Para isso, foi construído um jogo super trunfo sobre algumas das cervejas brasileiras.
 
+[GITHUB](https://github.com/irissonnlima/Super_Trunfo.git)
+
 ## 1. REGRAS DO JOGO
 O jogo é multijogdador, para tanto, algumas regras foram levemente modificadas. Assim, para iniciar o jogo é nescessário informar a quantidade de jogadores.
 
