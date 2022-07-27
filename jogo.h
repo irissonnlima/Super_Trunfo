@@ -16,6 +16,7 @@ namespace trabalho
         bool                            Acabou;
         
         double          random          (bool uniform=true);
+        unsigned        avaliar         (int index);
         
         public:
                         jogo            ();
@@ -24,7 +25,6 @@ namespace trabalho
         void            mount_deck      ();
         void            shuffle         ();
         void            card_dist       ();
-        unsigned        avaliar         (int index);
 
         void            bot_play        ();  
         void            gamer_play      ();

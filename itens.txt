@@ -1,4 +1,21 @@
 Itens Requeridos
 
-- Foram construídos 4 classes :
-    - Cartas: 
+cards.cpp   implementação da classe card
+cards.cpp   linha 3, 15 construtor
+cards.cpp   linha 143 sobrecarga de operator []
+
+deck.cpp    implementação da classe deck
+deck.h      linha 10 agregação
+deck.cpp    linha 15 sobrecarga de operador =
+deck.cpp    linha 3, 6, 9 construtor
+
+jogador.cpp implementação da classe jogador
+jogador.h   linha 11 composição
+jogodor.cpp linha 3, 6 construtor
+jogador.cpp linha 3, 6 polimorfismo ad-hoc de sobrecarga
+jogador.cpp linha 9 sobrecarga do operador +=
+
+implementação da classe jogo
+jogo.h      linha 11, 12, 13, 14 composição
+logo.cpp    linha 17 construtor
+jogo.cpp    linha 95 polimorfismo ad-hoc coerção

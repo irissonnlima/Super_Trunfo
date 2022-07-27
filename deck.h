@@ -5,7 +5,7 @@
 
 namespace trabalho
 {
-    class deck : private card
+    class deck
     {
         std::vector<card>  card_list;
 

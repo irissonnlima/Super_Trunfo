@@ -7,7 +7,6 @@
 {card_list=cards;}
 
                 trabalho::deck::deck        (const deck& deck_copy)
-                :card()
 {
     card_list = deck_copy.card_list;                        
 }

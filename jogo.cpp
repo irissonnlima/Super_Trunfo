@@ -5,7 +5,7 @@ double          trabalho::jogo::random          (bool uniform)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> uni (0,100);
-    std::normal_distribution<>      norm(50, 14);
+    std::normal_distribution<>      norm(50, 16.5);
     double val;
     if (uniform)
         val = uni(gen)/100.0;
